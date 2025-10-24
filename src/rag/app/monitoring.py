@@ -1,5 +1,4 @@
 # Мониторинг работы системы
-import time
 from datetime import datetime
 
 

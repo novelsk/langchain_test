@@ -1,11 +1,14 @@
+from io import BytesIO
+
+from PIL import Image as PILImage
+
 from langchain_ollama import OllamaLLM
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
-from IPython.display import Image, display
 
-from app.config.values import MODEL_NAME
+from config.values import DEEPSEEK
 
-llm = OllamaLLM(model=MODEL_NAME, temperature=0.1)
+llm = OllamaLLM(model=DEEPSEEK, temperature=0.1)
 
 
 # Graph state
@@ -66,7 +69,7 @@ workflow.add_edge("polish_joke", END)
 chain = workflow.compile()
 
 # Show workflow
-display(Image(chain.get_graph().draw_mermaid_png()))
+PILImage.open(BytesIO(chain.get_graph(xray=True).draw_mermaid_png())).show()
 
 # Invoke
 state = chain.invoke({"topic": "human"})

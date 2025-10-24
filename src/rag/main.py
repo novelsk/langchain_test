@@ -2,10 +2,10 @@
 import time
 from langchain_core.documents import Document
 
-from app.document import DocumentProcessor
-from app.monitoring import RAGMonitor
-from app.rag import SelfHostedRAGSystem
-from app.config import values
+from config.values import GPT_OSS
+from rag.app.document import DocumentProcessor
+from rag.app.monitoring import RAGMonitor
+from rag.app.rag import SelfHostedRAGSystem
 
 
 # Основная функция для запуска системы
@@ -13,7 +13,7 @@ def main():
     # Инициализация системы
     print("Инициализация RAG системы...")
     rag_system = SelfHostedRAGSystem(
-        model_name=values.MODEL_NAME)  # или "mistral", "codellama" и т.д.
+        model_name=GPT_OSS)  # или "mistral", "codellama" и т.д.
     monitor = RAGMonitor()
 
     # Создаем тестовые документы (в реальном проекте загружайте из файлов)
